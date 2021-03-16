@@ -1,0 +1,24 @@
+PATH
+  remote: .
+  specs:
+    a2 (0.1.0)
+      cmdparse
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    cmdparse (3.0.7)
+    minitest (5.14.2)
+    rake (10.5.0)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  a2!
+  bundler (~> 1.17)
+  minitest (~> 5.0)
+  rake (~> 10.0)
+
+BUNDLED WITH
+   1.17.3

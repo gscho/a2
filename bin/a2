@@ -1,0 +1,6 @@
+#!/usr/bin/env ruby
+require 'a2'
+
+include A2::Parser
+
+parse!
