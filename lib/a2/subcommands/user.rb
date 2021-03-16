@@ -3,61 +3,58 @@ module A2
     class User < CmdParse::Command
       def initialize
         super('user')
-        add_command(ListAll.new)
-        add_command(Create.new)
-        add_command(Get.new)
-        add_command(Update.new)
-        add_command(Delete.new)
+        add_command(UserCommands::ListAll.new)
+        add_command(UserCommands::Create.new)
+        add_command(UserCommands::Get.new)
+        add_command(UserCommands::Update.new)
+        add_command(UserCommands::Delete.new)
       end
     end
-    class ListAll < CmdParse::Command
-      def initialize
-        super('list-all', takes_commands: false)
-        options.on('-x', '--example', 'Example option') { puts 'example' }
-      end
+    module UserCommands
+      class ListAll < CmdParse::Command
+        def initialize
+          super('list-all', takes_commands: false)
+        end
 
-      def execute(name, *opt)
-        puts "Hello #{name}, options: #{opt.join(', ')}"
+        def execute(*opt)
+          puts command_parser.data[:url]
+        end
       end
-    end
-    class Create < CmdParse::Command
-      def initialize
-        super('create-user', takes_commands: false)
-        options.on('-x', '--example', 'Example option') { puts 'example' }
-      end
+      class Create < CmdParse::Command
+        def initialize
+          super('create-user', takes_commands: false)
+        end
 
-      def execute(name, *opt)
-        puts "Hello #{name}, options: #{opt.join(', ')}"
+        def execute(name, *opt)
+          puts 'create-user'
+        end
       end
-    end
-    class Get < CmdParse::Command
-      def initialize
-        super('get-user', takes_commands: false)
-        options.on('-x', '--example', 'Example option') { puts 'example' }
-      end
+      class Get < CmdParse::Command
+        def initialize
+          super('get-user', takes_commands: false)
+        end
 
-      def execute(name, *opt)
-        puts "Hello #{name}, options: #{opt.join(', ')}"
+        def execute(name, *opt)
+          puts 'get-user'
+        end
       end
-    end
-    class Update < CmdParse::Command
-      def initialize
-        super('update-user', takes_commands: false)
-        options.on('-x', '--example', 'Example option') { puts 'example' }
-      end
+      class Update < CmdParse::Command
+        def initialize
+          super('update-user', takes_commands: false)
+        end
 
-      def execute(name, *opt)
-        puts "Hello #{name}, options: #{opt.join(', ')}"
+        def execute(name, *opt)
+          puts 'update-user'
+        end
       end
-    end
-    class Delete < CmdParse::Command
-      def initialize
-        super('delete-user', takes_commands: false)
-        options.on('-x', '--example', 'Example option') { puts 'example' }
-      end
+      class Delete < CmdParse::Command
+        def initialize
+          super('delete-user', takes_commands: false)
+        end
 
-      def execute(name, *opt)
-        puts "Hello #{name}, options: #{opt.join(', ')}"
+        def execute(name, *opt)
+          puts 'delete-user'
+        end
       end
     end
   end
