@@ -3,6 +3,7 @@ module A2
     class User < CmdParse::Command
       def initialize
         super('user')
+        short_desc('iam user')
         add_command(UserCommands::ListAll.new)
         add_command(UserCommands::Create.new)
         add_command(UserCommands::Get.new)
@@ -16,44 +17,71 @@ module A2
           super('list-all', takes_commands: false)
         end
 
-        def execute(*opt)
-          puts command_parser.data[:url]
+        def execute
+          A2::Client.new(command_parser.data).list_all_users
         end
       end
       class Create < CmdParse::Command
         def initialize
-          super('create-user', takes_commands: false)
+          super('create', takes_commands: false)
         end
 
-        def execute(name, *opt)
-          puts 'create-user'
+        def execute
+          puts 'create'
         end
       end
       class Get < CmdParse::Command
         def initialize
-          super('get-user', takes_commands: false)
+          super('get', takes_commands: false)
+          @opt = {}
+          options.on('-i', '--id ID', 'User ID') do |id|
+            @opt[:id] = id
+          end
         end
 
-        def execute(name, *opt)
-          puts 'get-user'
+        def execute
+          raise A2::Error, "Must provide a user ID" if @opt[:id].nil?
+
+          A2::Client.new(command_parser.data).get_user(@opt[:id])
         end
       end
       class Update < CmdParse::Command
         def initialize
-          super('update-user', takes_commands: false)
+          super('update', takes_commands: false)
+          @opt = {}
+          options.on('-i', '--id ID', 'User ID') do |id|
+            @opt[:id] = id
+          end
         end
 
-        def execute(name, *opt)
-          puts 'update-user'
+        def execute
+          puts 'update'
         end
       end
       class Delete < CmdParse::Command
         def initialize
-          super('delete-user', takes_commands: false)
+          super('delete', takes_commands: false)
+          @opt = {}
+          options.on('-i', '--id ID', 'User ID') do |id|
+            @opt[:id] = id
+          end
         end
 
-        def execute(name, *opt)
-          puts 'delete-user'
+        def ask_for_approval
+          puts "Are you sure you want to delete user #{@opt[:id]}?"
+          puts "Only 'yes' will be accepted to proceed:"
+          answer = $stdin.gets.chomp
+          puts 'Operation cancelled' unless answer.eql?('yes')
+          answer
+        end
+
+        def execute
+          raise A2::Error, "Must provide a user ID" if @opt[:id].nil?
+
+          answer = 'yes'
+          answer = ask_for_approval unless @opt[:yes]
+
+          A2::Client.new(command_parser.data).delete_user(@opt[:id]) if answer.eql?('yes')
         end
       end
     end

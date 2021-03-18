@@ -6,7 +6,7 @@ module A2
     class IAM < CmdParse::Command
       def initialize
         super('iam')
-        short_desc('iam description')
+        short_desc('Identity access manangement commands')
         add_command(A2::SubCommand::User.new)
         add_command(A2::SubCommand::Team.new)
       end
