@@ -7,8 +7,20 @@ module A2
       def initialize
         super('iam')
         short_desc('Identity access manangement commands')
-        add_command(A2::SubCommand::User.new)
-        add_command(A2::SubCommand::Team.new)
+        add_command(A2::Subcommand::User::ListAll.new)
+        add_command(A2::Subcommand::User::Create.new)
+        add_command(A2::Subcommand::User::Get.new)
+        add_command(A2::Subcommand::User::Update.new)
+        add_command(A2::Subcommand::User::Delete.new)
+        add_command(A2::Subcommand::Team::ListAll.new)
+        add_command(A2::Subcommand::Team::Create.new)
+        add_command(A2::Subcommand::Team::Get.new)
+        add_command(A2::Subcommand::Team::Update.new)
+        add_command(A2::Subcommand::Team::Delete.new)
+        add_command(A2::Subcommand::Team::ListAllMembership.new)
+        add_command(A2::Subcommand::Team::AddMembership.new)
+        add_command(A2::Subcommand::Team::GetTeamsByMembership.new)
+        add_command(A2::Subcommand::Team::RemoveMembership.new)
       end
     end
   end

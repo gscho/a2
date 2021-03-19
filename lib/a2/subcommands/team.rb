@@ -1,107 +1,97 @@
 module A2
-  module SubCommand
-    class Team < CmdParse::Command
-      def initialize
-        super('team')
-        add_command(TeamCommands::ListAll.new)
-        add_command(TeamCommands::Create.new)
-        add_command(TeamCommands::Get.new)
-        add_command(TeamCommands::Update.new)
-        add_command(TeamCommands::Delete.new)
-        add_command(TeamCommands::ListAllMembership.new)
-        add_command(TeamCommands::CreateMembership.new)
-        add_command(TeamCommands::GetMembership.new)
-        add_command(TeamCommands::DeleteMembership.new)
-      end
-    end
-    module TeamCommands
+  module Subcommand
+    module Team
       class ListAll < CmdParse::Command
         def initialize
-          super('list-all', takes_commands: false)
+          super('list-all-teams', takes_commands: false)
         end
 
-        def execute(name, *opt)
-          puts 'list-all'
+        def execute
+          A2::Client.new(command_parser.data).list_all_teams
         end
       end
       class Create < CmdParse::Command
         def initialize
-          super('create-user', takes_commands: false)
-          options.on('-x', '--example', 'Example option') { puts 'example' }
+          super('create-team', takes_commands: false)
         end
 
-        def execute(name, *opt)
-          puts "Hello #{name}, options: #{opt.join(', ')}"
+        def execute(id, name, project_ids = '')
+          json = {
+            'id' => id,
+            'name' => name,
+            'projects' => project_ids.split(',')
+          }.to_json
+          A2::Client.new(command_parser.data).create_team(json)
         end
       end
       class Get < CmdParse::Command
         def initialize
-          super('get-user', takes_commands: false)
-          options.on('-x', '--example', 'Example option') { puts 'example' }
+          super('get-team', takes_commands: false)
         end
 
-        def execute(name, *opt)
-          puts "Hello #{name}, options: #{opt.join(', ')}"
+        def execute(id)
+          A2::Client.new(command_parser.data).get_team(id)
         end
       end
       class Update < CmdParse::Command
         def initialize
-          super('update-user', takes_commands: false)
-          options.on('-x', '--example', 'Example option') { puts 'example' }
+          super('update-team', takes_commands: false)
         end
 
-        def execute(name, *opt)
-          puts "Hello #{name}, options: #{opt.join(', ')}"
+        def execute(id, name, project_ids = '')
+          json = {
+            'id' => id,
+            'name' => name,
+            'projects' => project_ids.split(',')
+          }.to_json
+          A2::Client.new(command_parser.data).update_team(id, json)
         end
       end
-      class Delete < CmdParse::Command
+      class Delete < A2::Subcommand::CommandWithApproval
         def initialize
-          super('delete-user', takes_commands: false)
-          options.on('-x', '--example', 'Example option') { puts 'example' }
+          super('delete-team', takes_commands: false)
         end
 
-        def execute(name, *opt)
-          puts "Hello #{name}, options: #{opt.join(', ')}"
+        def execute(id)
+          with_approval("delete team #{id}") do
+            A2::Client.new(command_parser.data).delete_team(id)
+          end
         end
       end
       class ListAllMembership < CmdParse::Command
         def initialize
-          super('list-all-membership', takes_commands: false)
-          options.on('-x', '--example', 'Example option') { puts 'example' }
+          super('list-all-team-membership', takes_commands: false)
         end
 
-        def execute(name, *opt)
-          puts "Hello #{name}, options: #{opt.join(', ')}"
+        def execute(team_id)
+          A2::Client.new(command_parser.data).list_all_membership(team_id)
         end
       end
-      class CreateMembership < CmdParse::Command
+      class AddMembership < CmdParse::Command
         def initialize
-          super('create-membership', takes_commands: false)
-          options.on('-x', '--example', 'Example option') { puts 'example' }
+          super('add-membership', takes_commands: false)
         end
 
-        def execute(name, *opt)
-          puts "Hello #{name}, options: #{opt.join(', ')}"
+        def execute
+
         end
       end
-      class GetMembership < CmdParse::Command
+      class GetTeamsByMembership < CmdParse::Command
         def initialize
-          super('get-membership', takes_commands: false)
-          options.on('-x', '--example', 'Example option') { puts 'example' }
+          super('get-teams-by-membership', takes_commands: false)
         end
 
-        def execute(name, *opt)
-          puts "Hello #{name}, options: #{opt.join(', ')}"
+        def execute(membership_id)
+          A2::Client.new(command_parser.data).get_teams_by_membership(membership_id)
         end
       end
-      class DeleteMembership < CmdParse::Command
+      class RemoveMembership < CmdParse::Command
         def initialize
-          super('delete-membership', takes_commands: false)
-          options.on('-x', '--example', 'Example option') { puts 'example' }
+          super('remove-membership', takes_commands: false)
         end
 
-        def execute(name, *opt)
-          puts "Hello #{name}, options: #{opt.join(', ')}"
+        def execute
+
         end
       end
     end

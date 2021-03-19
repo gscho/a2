@@ -1,20 +1,9 @@
 module A2
-  module SubCommand
-    class User < CmdParse::Command
-      def initialize
-        super('user')
-        short_desc('iam user')
-        add_command(UserCommands::ListAll.new)
-        add_command(UserCommands::Create.new)
-        add_command(UserCommands::Get.new)
-        add_command(UserCommands::Update.new)
-        add_command(UserCommands::Delete.new)
-      end
-    end
-    module UserCommands
+  module Subcommand
+    module User
       class ListAll < CmdParse::Command
         def initialize
-          super('list-all', takes_commands: false)
+          super('list-all-users', takes_commands: false)
         end
 
         def execute
@@ -23,65 +12,50 @@ module A2
       end
       class Create < CmdParse::Command
         def initialize
-          super('create', takes_commands: false)
+          super('create-user', takes_commands: false)
         end
 
-        def execute
-          puts 'create'
+        def execute(id, display_name = id, password)
+          json = {
+            'id' => id,
+            'name' => display_name,
+            'password' => password
+          }.to_json
+          A2::Client.new(command_parser.data).create_user(json)
         end
       end
       class Get < CmdParse::Command
         def initialize
-          super('get', takes_commands: false)
-          @opt = {}
-          options.on('-i', '--id ID', 'User ID') do |id|
-            @opt[:id] = id
-          end
+          super('get-user', takes_commands: false)
         end
 
-        def execute
-          raise A2::Error, "Must provide a user ID" if @opt[:id].nil?
+        def execute(id)
 
-          A2::Client.new(command_parser.data).get_user(@opt[:id])
+          A2::Client.new(command_parser.data).get_user(id)
         end
       end
       class Update < CmdParse::Command
         def initialize
-          super('update', takes_commands: false)
-          @opt = {}
-          options.on('-i', '--id ID', 'User ID') do |id|
-            @opt[:id] = id
-          end
+          super('update-user', takes_commands: false)
         end
 
-        def execute
-          puts 'update'
+        def execute(id, display_name, password = nil)
+          body = { 'name' => display_name}
+          body['password'] = password unless password.nil?
+
+          json = body.to_json
+          A2::Client.new(command_parser.data).update_user(id, json)
         end
       end
-      class Delete < CmdParse::Command
+      class Delete < A2::Subcommand::CommandWithApproval
         def initialize
-          super('delete', takes_commands: false)
-          @opt = {}
-          options.on('-i', '--id ID', 'User ID') do |id|
-            @opt[:id] = id
+          super('delete-user', takes_commands: false)
+        end
+
+        def execute(id)
+          with_approval("delete user #{id}") do
+            A2::Client.new(command_parser.data).delete_user(id)
           end
-        end
-
-        def ask_for_approval
-          puts "Are you sure you want to delete user #{@opt[:id]}?"
-          puts "Only 'yes' will be accepted to proceed:"
-          answer = $stdin.gets.chomp
-          puts 'Operation cancelled' unless answer.eql?('yes')
-          answer
-        end
-
-        def execute
-          raise A2::Error, "Must provide a user ID" if @opt[:id].nil?
-
-          answer = 'yes'
-          answer = ask_for_approval unless @opt[:yes]
-
-          A2::Client.new(command_parser.data).delete_user(@opt[:id]) if answer.eql?('yes')
         end
       end
     end
