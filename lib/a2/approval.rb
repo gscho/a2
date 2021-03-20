@@ -1,7 +1,6 @@
 module A2
   module Subcommand
-    class CommandWithApproval < CmdParse::Command
-
+    module Approval
       def initialize(name, opts = {})
         super(name, takes_commands: false)
         @opt = {}
