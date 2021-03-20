@@ -30,7 +30,6 @@ module A2
         end
 
         def execute(id)
-
           A2::Client.new(command_parser.data).get_user(id)
         end
       end
@@ -47,7 +46,8 @@ module A2
           A2::Client.new(command_parser.data).update_user(id, json)
         end
       end
-      class Delete < A2::Subcommand::CommandWithApproval
+      class Delete < CmdParse::Command
+        include A2::Subcommand::Approval
         def initialize
           super('delete-user', takes_commands: false)
         end

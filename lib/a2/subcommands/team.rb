@@ -1,6 +1,13 @@
 module A2
   module Subcommand
     module Team
+      def self.generate_team_json(id, name, project_ids)
+        {
+          'id' => id,
+          'name' => name,
+          'projects' => project_ids.split(',')
+        }.to_json
+      end
       class ListAll < CmdParse::Command
         def initialize
           super('list-all-teams', takes_commands: false)
@@ -16,11 +23,7 @@ module A2
         end
 
         def execute(id, name, project_ids = '')
-          json = {
-            'id' => id,
-            'name' => name,
-            'projects' => project_ids.split(',')
-          }.to_json
+          json = Team.generate_team_json(id, name, project_ids)
           A2::Client.new(command_parser.data).create_team(json)
         end
       end
@@ -39,15 +42,13 @@ module A2
         end
 
         def execute(id, name, project_ids = '')
-          json = {
-            'id' => id,
-            'name' => name,
-            'projects' => project_ids.split(',')
-          }.to_json
+          json = Team.generate_team_json(id, name, project_ids)
           A2::Client.new(command_parser.data).update_team(id, json)
         end
       end
-      class Delete < A2::Subcommand::CommandWithApproval
+      class Delete < CmdParse::Command
+        include A2::Subcommand::Approval
+
         def initialize
           super('delete-team', takes_commands: false)
         end
