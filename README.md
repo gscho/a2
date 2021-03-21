@@ -1,38 +1,50 @@
 # A2
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/a2`. To experiment with that code, run `bin/console` for an interactive prompt.
+This gem is a CLI for interacting with Chef Automate 2+ APIs.
 
-TODO: Delete this and the text above, and describe your gem
 
-## Installation
+## Usage
 
-Add this line to your application's Gemfile:
+### Using from the command line
+
+Install the CLI via rubygems:
+
+    $ gem install a2
+
+The URL and auth token for your Chef Automate instance must be provided either via command line args or through environment variables. If both are provided, the command line args take precedence.
+
+Environment variables:
+
+```
+AUTOMATE_URL="https://automate.example.com"
+AUTOMATE_TOKEN="my-token"
+SSL_NO_VERIFY=true
+```
+
+List the available commands:
+
+    $ a2 --help
+
+
+### Using as a library
+
+You can also use it as a library by adding this line to your application's Gemfile:
 
 ```ruby
 gem 'a2'
 ```
 
-And then execute:
+And then installing via bundler:
 
-    $ bundle
+    $ bundle install
 
-Or install it yourself as:
+Making requests:
 
-    $ gem install a2
-
-## Usage
-
-TODO: Write usage instructions here
-
-## Development
-
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake test` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
-
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
-
-## Contributing
-
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/a2.
+```
+require 'a2'
+client = A2::Client.new(automate_url: 'https://automate.example.com', automate_token: 'my-token', ssl_no_verify: true)
+client.list_all_users
+```
 
 ## License
 
