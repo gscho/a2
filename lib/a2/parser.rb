@@ -6,7 +6,7 @@ module A2
       parser.add_command(CmdParse::HelpCommand.new)
       parser.add_command(CmdParse::VersionCommand.new)
       parser.add_command(A2::Command::IAM.new)
-      parser.add_command(A2::Command::Node.new)
+      parser.add_command(A2::Command::NodeMgmt.new)
       parser.global_options do |opt|
         opt.on("-u", "--automate-url [url]", "The Chef Automate URL") do |url|
           parser.data[:automate_url] = url

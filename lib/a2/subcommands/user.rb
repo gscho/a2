@@ -7,7 +7,7 @@ module A2
         end
 
         def execute
-          A2::Client.new(command_parser.data).list_all_users
+          puts JSON.pretty_generate(A2::Client.new(command_parser.data).list_all_users)
         end
       end
       class Create < CmdParse::Command
@@ -21,7 +21,7 @@ module A2
             'name' => display_name,
             'password' => password
           }.to_json
-          A2::Client.new(command_parser.data).create_user(json)
+          puts JSON.pretty_generate(A2::Client.new(command_parser.data).create_user(json))
         end
       end
       class Get < CmdParse::Command
@@ -30,7 +30,7 @@ module A2
         end
 
         def execute(id)
-          A2::Client.new(command_parser.data).get_user(id)
+          puts JSON.pretty_generate(A2::Client.new(command_parser.data).get_user(id))
         end
       end
       class Update < CmdParse::Command
@@ -43,7 +43,7 @@ module A2
           body['password'] = password unless password.nil?
 
           json = body.to_json
-          A2::Client.new(command_parser.data).update_user(id, json)
+          puts JSON.pretty_generate(A2::Client.new(command_parser.data).update_user(id, json))
         end
       end
       class Delete < CmdParse::Command
@@ -54,7 +54,7 @@ module A2
 
         def execute(id)
           with_approval("delete user #{id}") do
-            A2::Client.new(command_parser.data).delete_user(id)
+            puts JSON.pretty_generate(A2::Client.new(command_parser.data).delete_user(id))
           end
         end
       end

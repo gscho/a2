@@ -14,7 +14,7 @@ module A2
         end
 
         def execute
-          A2::Client.new(command_parser.data).list_all_teams
+          puts JSON.pretty_generate(A2::Client.new(command_parser.data).list_all_teams)
         end
       end
       class Create < CmdParse::Command
@@ -24,7 +24,7 @@ module A2
 
         def execute(id, name, project_ids = '')
           json = Team.generate_team_json(id, name, project_ids)
-          A2::Client.new(command_parser.data).create_team(json)
+          puts JSON.pretty_generate(A2::Client.new(command_parser.data).create_team(json))
         end
       end
       class Get < CmdParse::Command
@@ -33,7 +33,7 @@ module A2
         end
 
         def execute(id)
-          A2::Client.new(command_parser.data).get_team(id)
+          puts JSON.pretty_generate(A2::Client.new(command_parser.data).get_team(id))
         end
       end
       class Update < CmdParse::Command
@@ -43,7 +43,7 @@ module A2
 
         def execute(id, name, project_ids = '')
           json = Team.generate_team_json(id, name, project_ids)
-          A2::Client.new(command_parser.data).update_team(id, json)
+          puts JSON.pretty_generate(A2::Client.new(command_parser.data).update_team(id, json))
         end
       end
       class Delete < CmdParse::Command
@@ -55,7 +55,7 @@ module A2
 
         def execute(id)
           with_approval("delete team #{id}") do
-            A2::Client.new(command_parser.data).delete_team(id)
+            puts JSON.pretty_generate(A2::Client.new(command_parser.data).delete_team(id))
           end
         end
       end
@@ -65,7 +65,7 @@ module A2
         end
 
         def execute(team_id)
-          A2::Client.new(command_parser.data).list_all_membership(team_id)
+          puts JSON.pretty_generate(A2::Client.new(command_parser.data).list_all_membership(team_id))
         end
       end
       class AddMembership < CmdParse::Command
@@ -83,7 +83,7 @@ module A2
         end
 
         def execute(membership_id)
-          A2::Client.new(command_parser.data).get_teams_by_membership(membership_id)
+          puts JSON.pretty_generate(A2::Client.new(command_parser.data).get_teams_by_membership(membership_id))
         end
       end
       class RemoveMembership < CmdParse::Command

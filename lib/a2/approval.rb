@@ -4,7 +4,7 @@ module A2
       def initialize(name, opts = {})
         super(name, takes_commands: false)
         @opt = {}
-        options.on('-y', '--yes', 'Auto accept user deletion prompt') do
+        options.on('-y', '--yes', 'Auto approve the deletion prompt') do
           @opt[:yes] = true
         end
       end
@@ -13,7 +13,7 @@ module A2
         puts "Are you sure you want to #{message}?"
         puts "Only 'yes' will be accepted to proceed:"
         answer = $stdin.gets.chomp
-        puts 'Operation cancelled' unless answer.eql?('yes')
+        abort('Operation cancelled') unless answer.eql?('yes')
         answer
       end
 

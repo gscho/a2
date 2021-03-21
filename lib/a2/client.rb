@@ -22,7 +22,7 @@ module A2
         verify: !@ssl_no_verify,
         headers: {"api-token" => @automate_token},
       })
-      puts JSON.pretty_generate(JSON.parse(response.body))
+      JSON.parse(response.body)
     end
 
     def put(path, json)
@@ -31,7 +31,7 @@ module A2
         headers: {"api-token" => @automate_token},
         body: json
       })
-      puts JSON.pretty_generate(JSON.parse(response.body))
+      JSON.parse(response.body)
     end
 
     def post(path, json)
@@ -40,7 +40,7 @@ module A2
         headers: {"api-token" => @automate_token},
         body: json
       })
-      puts JSON.pretty_generate(JSON.parse(response.body))
+      JSON.parse(response.body)
     end
 
     def delete(path)
@@ -48,7 +48,7 @@ module A2
         verify: !@ssl_no_verify,
         headers: {"api-token" => @automate_token},
       })
-      puts JSON.pretty_generate(JSON.parse(response.body))
+      JSON.parse(response.body)
     end
   end
 end
