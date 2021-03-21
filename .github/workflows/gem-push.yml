@@ -1,6 +1,11 @@
 name: Publish Gem to rubygems.org
 
-on: workflow_dispatch
+on: 
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Set gem to this number and release'
+        required: true
 
 jobs:
   build:
@@ -19,7 +24,7 @@ jobs:
         touch $HOME/.gem/credentials
         chmod 0600 $HOME/.gem/credentials
         printf -- "---\n:rubygems_api_key: ${GEM_HOST_API_KEY}\n" > $HOME/.gem/credentials
-        gem build *.gemspec
-        gem push *.gem
+        sed 's/VERSION = .*/VERSION = "${{ github.event.inputs.version }}"/g'
+        bundle exec rake release
       env:
         GEM_HOST_API_KEY: "${{secrets.RUBYGEMS_AUTH_TOKEN}}"
