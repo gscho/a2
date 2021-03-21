@@ -1,4 +1,4 @@
-name: Ruby
+name: Run rake
 
 on:
   push:
