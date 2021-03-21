@@ -1,4 +1,4 @@
-name: Run rake
+name: Unit Tests
 
 on:
   push:
