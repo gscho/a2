@@ -1,6 +1,6 @@
 module A2
   class Client
-    module ManagedNodes
+    module Nodes
       def get_managed_node(id)
         get "/api/v0/nodes/id/#{id}"
       end

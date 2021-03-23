@@ -3,7 +3,7 @@ module A2
     module User
       class ListAll < CmdParse::Command
         def initialize
-          super('list-all-users', takes_commands: false)
+          super('list-users', takes_commands: false)
         end
 
         def execute
@@ -47,7 +47,7 @@ module A2
         end
       end
       class Delete < CmdParse::Command
-        include A2::Subcommand::Approval
+        include A2::Approved
         def initialize
           super('delete-user', takes_commands: false)
         end

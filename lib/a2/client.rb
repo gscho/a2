@@ -1,10 +1,12 @@
-require_relative 'client/managed_nodes'
+require_relative 'client/config_mgmt'
+require_relative 'client/nodes'
 require_relative 'client/teams'
 require_relative 'client/users'
 
 module A2
   class Client
-    include A2::Client::ManagedNodes
+    include A2::Client::ConfigMgmt
+    include A2::Client::Nodes
     include A2::Client::Teams
     include A2::Client::Users
 

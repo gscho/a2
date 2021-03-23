@@ -10,7 +10,7 @@ module A2
       end
       class ListAll < CmdParse::Command
         def initialize
-          super('list-all-teams', takes_commands: false)
+          super('list-teams', takes_commands: false)
         end
 
         def execute
@@ -47,7 +47,7 @@ module A2
         end
       end
       class Delete < CmdParse::Command
-        include A2::Subcommand::Approval
+        include A2::Approved
 
         def initialize
           super('delete-team', takes_commands: false)
@@ -61,7 +61,7 @@ module A2
       end
       class ListAllMembership < CmdParse::Command
         def initialize
-          super('list-all-team-membership', takes_commands: false)
+          super('list-team-members', takes_commands: false)
         end
 
         def execute(team_id)
