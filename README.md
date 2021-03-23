@@ -1,5 +1,7 @@
 # A2
 
+![build status](https://github.com/gscho/a2-cli/actions/workflows/run-rake.yml/badge.svg?branch=main)
+
 This gem is a CLI for interacting with Chef Automate 2+ APIs.
 
 
