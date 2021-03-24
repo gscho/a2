@@ -1,6 +1,6 @@
 module A2
   module Subcommand
-    module ConfigMgmt
+    module Infra
       class ListAllCheckedInNodes < CmdParse::Command
         include A2::Paginated
         def initialize

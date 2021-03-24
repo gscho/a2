@@ -1,6 +1,6 @@
 module A2
   module Subcommand
-    module Node
+    module NodeMgmt
       class Get < CmdParse::Command
         def initialize
           super('get', takes_commands: false)

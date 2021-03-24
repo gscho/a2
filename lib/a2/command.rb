@@ -1,6 +1,6 @@
-require_relative 'commands/config_mgmt'
 require_relative 'commands/iam'
-require_relative 'commands/node'
+require_relative 'commands/infra'
+require_relative 'commands/node_mgmt'
 
 module A2
   module Command
