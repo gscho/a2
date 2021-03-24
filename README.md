@@ -26,6 +26,47 @@ SSL_NO_VERIFY=true
 List the available commands:
 
     $ a2 --help
+    Usage: a2 [options] {cfgmgmt | help | iam | node | version}
+
+    Available commands:
+        cfgmgmt           Chef Infra config management commands
+          list-missing-nodes
+          list-node-status-counts
+          list-nodes
+          list-orgs
+          show-attributes
+        help              Provide help for individual commands
+        iam               Identity access management commands
+          add-membership
+          create-team
+          create-user
+          delete-team
+          delete-user
+          get-team
+          get-teams-by-membership
+          get-user
+          list-team-members
+          list-teams
+          list-users
+          remove-membership
+          update-team
+          update-user
+        node              Node commands
+          bulk-delete-by-filter
+          bulk-delete-by-ids
+          delete
+          get
+          search
+        version           Show the version of the program
+
+    Options (take precedence over global options):
+        -v, --version                    Show the version of the program
+
+    Global Options:
+        -u, --automate-url [url]         The Chef Automate URL
+        -t, --automate-token [token]     The Chef Automate API token
+        -N, --ssl-no-verify              Disable SSL verification
+        -h, --help                       Show help
 
 
 ### Using as a library
