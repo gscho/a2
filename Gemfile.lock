@@ -20,7 +20,9 @@ GEM
     rake (13.0.3)
 
 PLATFORMS
+  ruby
   x86_64-darwin-17
+  x86_64-linux
 
 DEPENDENCIES
   a2!
