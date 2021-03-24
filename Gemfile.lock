@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    a2 (0.1.0)
+    a2 (0.1.1)
       cmdparse
       httparty
 
@@ -15,18 +15,18 @@ GEM
     mime-types (3.3.1)
       mime-types-data (~> 3.2015)
     mime-types-data (3.2021.0225)
-    minitest (5.14.2)
+    minitest (5.14.4)
     multi_xml (0.6.0)
     rake (13.0.3)
 
 PLATFORMS
-  ruby
+  x86_64-darwin-17
 
 DEPENDENCIES
   a2!
-  bundler (~> 1.17)
+  bundler (~> 2.2.15)
   minitest (~> 5.0)
   rake (>= 12.3.3)
 
 BUNDLED WITH
-   1.17.3
+   2.2.15
