@@ -9,6 +9,10 @@ module A2
         get "/api/v0/cfgmgmt/stats/missing_node_duration_counts#{query_string}"
       end
 
+      def list_all_node_runs(node_id, query_string = '')
+        get "/api/v0/cfgmgmt/nodes/#{node_id}/runs#{query_string}"
+      end
+
       def list_all_node_status_counts(query_string = '')
         get "/api/v0/cfgmgmt/stats/node_counts#{query_string}"
       end
@@ -19,6 +23,10 @@ module A2
 
       def show_attributes(node_id)
         get "/api/v0/cfgmgmt/nodes/#{node_id}/attribute"
+      end
+
+      def show_node_run(node_id, run_id, query_string = '')
+        get "/api/v0/cfgmgmt/nodes/#{node_id}/runs/#{run_id}#{query_string}"
       end
     end
   end

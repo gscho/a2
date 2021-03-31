@@ -3,7 +3,7 @@ module A2
     def initialize(name, opts = {})
       set_custom_opts!(opts)
       super(name, opts)
-      set_filter_optparse_options!(options)
+      set_filter_optparse_options!(options, @query_filter)
     end
 
     def set_custom_opts!(opts)
@@ -12,21 +12,24 @@ module A2
       @filter_key = opts.delete(:filter_key) || 'key'
     end
 
-    def set_filter_optparse_options!(options)
+    def set_filter_optparse_options!(options, query_filter)
       options.on('-f', '--filters FILTERS', 'A comma-separated list of filters.') do |filters|
         @opt[:filters] = filters
       end
-      # Only available for POST body filters
-      options.on('-j', '--json-file FILE', 'Path to a json file containing a filter payload.') do |file|
-        @opt[:json_file] = file
-      end unless @query_filter 
-      # Only available for query parameter filters
-      options.on('-S', '--start START', 'Earliest most recent check-in node information to return. Formatted iso8601 (YYYY-MM-DD\'T\'HH:mm:ssZ)') do |start|
-        @opt[:start] = start
-      end if @query_filter 
-      options.on('-E', '--end END', 'Latest most recent check-in node information to return. Formatted iso8601 (YYYY-MM-DD\'T\'HH:mm:ssZ)') do |end_arg|
-        @opt[:end] = end_arg
-      end if @query_filter 
+      if query_filter
+        # Only available for query parameter filters
+        options.on('-S', '--start-time START', 'Earliest most recent check-in node information to return. Formatted iso8601 (YYYY-MM-DD\'T\'HH:mm:ssZ)') do |start_time|
+          @opt[:start] = start_time
+        end
+        options.on('-E', '--end-time END', 'Latest most recent check-in node information to return. Formatted iso8601 (YYYY-MM-DD\'T\'HH:mm:ssZ)') do |end_time|
+          @opt[:end] = end_time
+        end
+      else
+        # Only available for POST body filters
+        options.on('-j', '--json-file FILE', 'Path to a json file containing a filter payload.') do |file|
+          @opt[:json_file] = file
+        end
+      end
     end
 
     def parse_filters(filters)

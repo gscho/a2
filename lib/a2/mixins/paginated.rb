@@ -1,21 +1,22 @@
 module A2
   class Paginated < Filtered
     def initialize(name, opts = {})
+      disable_sort_opts = opts.delete(:disable_sort_opts) || false
       super(name, opts)
-      @opt[:order] = 'ASC'
+      @opt[:order] = 'ASC' unless disable_sort_opts
       options.on('-o', '--order ORDER', 'Return the results in ascending or descending order. Default is "ASC".') do |order|
         @opt[:order] = order
-      end
+      end unless disable_sort_opts
+      options.on('-s', '--sort SORT', 'Sort the results on a specific field.') do |sort|
+        @opt[:sort] = sort
+      end  unless disable_sort_opts
       options.on('-p', '--page PAGE', Integer, 'Starting page for the results. Default is 0') do |page|
         @opt[:page] = page
       end
       options.on('-P', '--per-page PER_PAGE', Integer, 'The number of results on each page. Default is 100') do |per_page|
         @opt[:per_page] = per_page
       end
-      options.on('-s', '--sort SORT', 'Sort the results on a specific field.') do |sort|
-        @opt[:sort] = sort
-      end
-      set_filter_optparse_options!(options)
+      set_filter_optparse_options!(options, @query_filter)
     end
 
     def with_paginated_filter_json(&block)

@@ -9,9 +9,11 @@ module A2
         long_desc('Chef Infra config management commands')
         add_command(A2::Subcommand::Infra::ListAllCheckedInNodes.new)
         add_command(A2::Subcommand::Infra::ListMissingNodesCount.new)
+        add_command(A2::Subcommand::Infra::ListNodeRuns.new)
         add_command(A2::Subcommand::Infra::ListNodeStatusCounts.new)
         add_command(A2::Subcommand::Infra::ListOrganizations.new)
         add_command(A2::Subcommand::Infra::ShowAttributes.new)
+        add_command(A2::Subcommand::Infra::ShowNodeRun.new)
       end
     end
   end
