@@ -27,15 +27,9 @@ SSL_NO_VERIFY=true
 List the available commands:
 
     $ a2 --help
-    Usage: a2 [options] {cfgmgmt | help | iam | node | version}
+    Usage: a2 [options] {help | iam | infra | nodemgmt | version}
 
     Available commands:
-        cfgmgmt           Chef Infra config management commands
-          list-missing-nodes
-          list-node-status-counts
-          list-nodes
-          list-orgs
-          show-attributes
         help              Provide help for individual commands
         iam               Identity access management commands
           add-membership
@@ -52,7 +46,13 @@ List the available commands:
           remove-membership
           update-team
           update-user
-        node              Node commands
+        infra             Chef Infra config management commands
+          list-missing-nodes
+          list-node-status-counts
+          list-nodes
+          list-orgs
+          show-attributes
+        nodemgmt          Node management commands
           bulk-delete-by-filter
           bulk-delete-by-ids
           delete
