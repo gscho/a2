@@ -1,12 +1,8 @@
 module A2
-  module Paginated
-    include A2::Filtered
+  class Paginated < Filtered
     def initialize(name, opts = {})
-      set_custom_opts!(opts)
       super(name, opts)
-      @opt = {
-        order: 'ASC'
-      }
+      @opt[:order] = 'ASC'
       options.on('-o', '--order ORDER', 'Return the results in ascending or descending order. Default is "ASC".') do |order|
         @opt[:order] = order
       end
@@ -22,12 +18,8 @@ module A2
       set_filter_optparse_options!(options)
     end
 
-    def generate_paginated_json_filters
-      generate_json_filters
-    end
-
     def with_paginated_filter_json(&block)
-      json = generate_paginated_json_filters
+      json = generate_json_filters
       yield(json)
     end
 

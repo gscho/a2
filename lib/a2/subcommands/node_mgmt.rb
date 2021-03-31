@@ -10,8 +10,7 @@ module A2
           puts JSON.pretty_generate(A2::Client.new(command_parser.data).get_managed_node(id))
         end
       end
-      class Search < CmdParse::Command
-        include A2::Paginated
+      class Search < Paginated
 
         def initialize
           super('search', takes_commands: false)
@@ -25,7 +24,6 @@ module A2
       end
       class Delete < CmdParse::Command
         include A2::Approved
-
         def initialize
           super('delete', takes_commands: false)
         end
@@ -38,7 +36,6 @@ module A2
       end
       class BulkDeleteById < CmdParse::Command
         include A2::Approved
-
         def initialize
           super('bulk-delete-by-ids', takes_commands: false)
         end
@@ -49,10 +46,8 @@ module A2
           end
         end
       end
-      class BulkDeleteByFilter < CmdParse::Command
+      class BulkDeleteByFilter < Paginated
         include A2::Approved
-        include A2::Paginated
-
         def initialize
           super('bulk-delete-by-filter', takes_commands: false)
         end

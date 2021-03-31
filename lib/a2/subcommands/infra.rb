@@ -1,8 +1,7 @@
 module A2
   module Subcommand
     module Infra
-      class ListAllCheckedInNodes < CmdParse::Command
-        include A2::Paginated
+      class ListAllCheckedInNodes < Paginated
         def initialize
           super('list-nodes', takes_commands: false, query_filter: true)
         end
@@ -26,8 +25,7 @@ module A2
           puts JSON.pretty_generate(A2::Client.new(command_parser.data).list_all_missing_nodes_count(@opt[:durations]))
         end
       end
-      class ListNodeStatusCounts < CmdParse::Command
-        include A2::Filtered
+      class ListNodeStatusCounts < Filtered
         def initialize
           super('list-node-status-counts', takes_commands: false, query_filter: true)
         end

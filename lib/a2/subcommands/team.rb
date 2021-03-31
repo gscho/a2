@@ -48,7 +48,6 @@ module A2
       end
       class Delete < CmdParse::Command
         include A2::Approved
-
         def initialize
           super('delete-team', takes_commands: false)
         end

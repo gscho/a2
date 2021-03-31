@@ -1,5 +1,6 @@
 require_relative 'client/config_mgmt'
 require_relative 'client/nodes'
+require_relative 'client/reporting'
 require_relative 'client/teams'
 require_relative 'client/users'
 
@@ -7,6 +8,7 @@ module A2
   class Client
     include A2::Client::ConfigMgmt
     include A2::Client::Nodes
+    include A2::Client::Reporting
     include A2::Client::Teams
     include A2::Client::Users
 
@@ -43,6 +45,18 @@ module A2
         body: json
       })
       JSON.parse(response.body)
+    end
+
+    def download_report(path, json, output_file)
+      File.open(output_file, "w") do |file|
+        HTTParty.post(File.join(@automate_url, path).to_s, {
+          verify: !@ssl_no_verify,
+          headers: {"api-token" => @automate_token},
+          body: json
+        }) do |fragment|
+          file.write(fragment)
+        end
+      end
     end
 
     def delete(path)

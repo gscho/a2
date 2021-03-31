@@ -1,5 +1,5 @@
 module A2
-  module Filtered
+  class Filtered < CmdParse::Command
     def initialize(name, opts = {})
       set_custom_opts!(opts)
       super(name, opts)
@@ -8,7 +8,8 @@ module A2
 
     def set_custom_opts!(opts)
       @opt ||= {}
-      @opt[:query_filter] = opts.delete(:query_filter) || false
+      @query_filter = opts.delete(:query_filter) || false
+      @filter_key = opts.delete(:filter_key) || 'key'
     end
 
     def set_filter_optparse_options!(options)
@@ -18,27 +19,23 @@ module A2
       # Only available for POST body filters
       options.on('-j', '--json-file FILE', 'Path to a json file containing a filter payload.') do |file|
         @opt[:json_file] = file
-      end unless query_filter?
+      end unless @query_filter 
       # Only available for query parameter filters
       options.on('-S', '--start START', 'Earliest most recent check-in node information to return. Formatted iso8601 (YYYY-MM-DD\'T\'HH:mm:ssZ)') do |start|
         @opt[:start] = start
-      end if query_filter?
+      end if @query_filter 
       options.on('-E', '--end END', 'Latest most recent check-in node information to return. Formatted iso8601 (YYYY-MM-DD\'T\'HH:mm:ssZ)') do |end_arg|
         @opt[:end] = end_arg
-      end if query_filter?
-    end
-
-    def query_filter?
-      @opt[:query_filter]
+      end if @query_filter 
     end
 
     def parse_filters(filters)
       parsed_filters = []
       filters.split(',').each do |f|
-        k,v = f.split(':')
+        k,*v = f.split(':')
         parsed_filters << {
-          'key' => k,
-          'values' => [v]
+          @filter_key => k,
+          'values' => [v.join(':')]
         }
       end
       parsed_filters

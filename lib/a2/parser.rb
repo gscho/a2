@@ -5,6 +5,7 @@ module A2
       parser.main_options.version = A2::VERSION
       parser.add_command(CmdParse::HelpCommand.new)
       parser.add_command(CmdParse::VersionCommand.new)
+      parser.add_command(A2::Command::Compliance.new)
       parser.add_command(A2::Command::IAM.new)
       parser.add_command(A2::Command::Infra.new)
       parser.add_command(A2::Command::NodeMgmt.new)
