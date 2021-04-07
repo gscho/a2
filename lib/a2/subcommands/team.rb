@@ -50,10 +50,11 @@ module A2
         include A2::Approved
         def initialize
           super('delete-team', takes_commands: false)
+          @opt = add_approval_option!(options)
         end
 
         def execute(id)
-          with_approval("delete team #{id}") do
+          with_approval(message: "delete team #{id}", auto_approved: @opt[:auto_approved]) do
             puts JSON.pretty_generate(A2::Client.new(command_parser.data).delete_team(id))
           end
         end
