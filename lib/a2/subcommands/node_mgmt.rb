@@ -26,10 +26,11 @@ module A2
         include A2::Approved
         def initialize
           super('delete', takes_commands: false)
+          @opt = add_approval_option!(options)
         end
 
         def execute(id)
-          with_approval("delete node #{id}") do
+          with_approval(message: "delete node #{id}", auto_approved: @opt[:auto_approved]) do
             puts JSON.pretty_generate(A2::Client.new(command_parser.data).delete_managed_node(id))
           end
         end
@@ -38,10 +39,11 @@ module A2
         include A2::Approved
         def initialize
           super('bulk-delete-by-ids', takes_commands: false)
+          @opt = add_approval_option!(options)
         end
 
         def execute(ids)
-          with_approval("delete nodes") do
+          with_approval(message: "delete nodes", auto_approved: @opt[:auto_approved]) do
             puts JSON.pretty_generate(A2::Client.new(command_parser.data).bulk_delete_managed_nodes_by_id(id))
           end
         end
@@ -50,11 +52,12 @@ module A2
         include A2::Approved
         def initialize
           super('bulk-delete-by-filter', takes_commands: false)
+          @opt = add_approval_option!(options)
         end
 
         def execute
           with_paginated_filter_json do |json|
-            with_approval("delete nodes using filter") do
+            with_approval(message: "delete nodes using filter", auto_approved: @opt[:auto_approved]) do
               puts JSON.pretty_generate(A2::Client.new(command_parser.data).bulk_delete_managed_nodes_by_filter(json))
             end
           end

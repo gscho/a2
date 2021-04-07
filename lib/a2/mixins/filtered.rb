@@ -1,5 +1,6 @@
 module A2
   class Filtered < CmdParse::Command
+    attr_reader :query_filter, :filter_key
     def initialize(name, opts = {})
       set_custom_opts!(opts)
       super(name, opts)
