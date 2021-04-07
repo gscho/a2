@@ -17,7 +17,8 @@ module A2
         end
 
         def execute(filename = nil, output_type = 'csv')
-          @opt.delete(:order)
+          # Workaround for bug: https://github.com/chef/automate/issues/4926
+          @opt[:order] = @opt[:order].downcase.eql?('asc') ? 0 : 1
           with_paginated_filter_json do |json|
             filename ||= "report-#{Time.now.strftime('%Y%m%d%H%M%S')}.#{@opt[:type]}"
             response = A2::Client.new(command_parser.data).export_node_reports(json, filename)
