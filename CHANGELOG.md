@@ -2,11 +2,16 @@
 
 ## [Unreleased](https://github.com/gscho/a2-cli/tree/HEAD)
 
-[Full Changelog](https://github.com/gscho/a2-cli/compare/v0.1.1...HEAD)
+[Full Changelog](https://github.com/gscho/a2-cli/compare/v0.2.0...HEAD)
 
 **Merged pull requests:**
 
+- Add some basic unit tests for approved and filtered mixins [\#2](https://github.com/gscho/a2-cli/pull/2) ([gscho](https://github.com/gscho))
 - Release v0.2.0 [\#1](https://github.com/gscho/a2-cli/pull/1) ([gscho](https://github.com/gscho))
+
+## [v0.2.0](https://github.com/gscho/a2-cli/tree/v0.2.0) (2021-04-07)
+
+[Full Changelog](https://github.com/gscho/a2-cli/compare/v0.1.1...v0.2.0)
 
 ## [v0.1.1](https://github.com/gscho/a2-cli/tree/v0.1.1) (2021-03-24)
 
