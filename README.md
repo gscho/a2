@@ -32,6 +32,7 @@ List the available commands:
     Available commands:
         compliance        Compliance management commands
           export-node-reports
+          list-reports
         help              Provide help for individual commands
         iam               Identity access management commands
           add-membership
