@@ -21,7 +21,7 @@ Environment variables:
 ```
 AUTOMATE_URL="https://automate.example.com"
 AUTOMATE_TOKEN="my-token"
-SSL_NO_VERIFY=true
+AUTOMATE_SSL_NO_VERIFY=true
 ```
 
 List the available commands:
