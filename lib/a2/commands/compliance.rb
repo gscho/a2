@@ -8,6 +8,7 @@ module A2
         short_desc('Compliance management commands')
         long_desc('Compliance management commands')
         add_command(A2::Subcommand::Reporting::ExportNodeReports.new)
+        add_command(A2::Subcommand::Reporting::ListReports.new)
       end
     end
   end

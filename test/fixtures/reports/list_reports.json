@@ -1,0 +1,191 @@
+{
+  "reports": [{
+      "id": "15547db8-5eaf-46ec-8a44-52b4ca648741",
+      "node_id": "f4025ae0-a8c5-4609-bfde-4ea581adc0e9",
+      "node_name": "minor-only",
+      "end_time": "2021-03-24T15:28:55Z",
+      "status": "failed",
+      "controls": {
+        "total": 57,
+        "passed": {
+          "total": 29
+        },
+        "skipped": {
+          "total": 1
+        },
+        "failed": {
+          "total": 27,
+          "minor": 27,
+          "major": 0,
+          "critical": 0
+        },
+        "waived": {
+          "total": 0
+        }
+      },
+      "environment": "",
+      "version": "",
+      "platform": null,
+      "statistics": null,
+      "profiles": [
+
+      ],
+      "job_id": "",
+      "ipaddress": "40.88.123.179",
+      "fqdn": "",
+      "chef_server": "",
+      "chef_organization": "",
+      "roles": [
+
+      ],
+      "chef_tags": [
+
+      ],
+      "projects": [
+
+      ],
+      "status_message": ""
+    },
+    {
+      "id": "15547db8-5eaf-46ec-8a44-52b4ca648741",
+      "node_id": "f4025ae0-a8c5-4609-bfde-4ea581adc0e9",
+      "node_name": "critical-only",
+      "end_time": "2021-03-24T15:28:55Z",
+      "status": "failed",
+      "controls": {
+        "total": 57,
+        "passed": {
+          "total": 29
+        },
+        "skipped": {
+          "total": 1
+        },
+        "failed": {
+          "total": 1,
+          "minor": 0,
+          "major": 0,
+          "critical": 1
+        },
+        "waived": {
+          "total": 0
+        }
+      },
+      "environment": "",
+      "version": "",
+      "platform": null,
+      "statistics": null,
+      "profiles": [
+
+      ],
+      "job_id": "",
+      "ipaddress": "40.88.123.179",
+      "fqdn": "",
+      "chef_server": "",
+      "chef_organization": "",
+      "roles": [
+
+      ],
+      "chef_tags": [
+
+      ],
+      "projects": [
+
+      ],
+      "status_message": ""
+    },
+    {
+      "id": "15547db8-5eaf-46ec-8a44-52b4ca648741",
+      "node_id": "f4025ae0-a8c5-4609-bfde-4ea581adc0e9",
+      "node_name": "major-and-critical",
+      "end_time": "2021-03-24T15:28:55Z",
+      "status": "failed",
+      "controls": {
+        "total": 57,
+        "passed": {
+          "total": 29
+        },
+        "skipped": {
+          "total": 1
+        },
+        "failed": {
+          "total": 1,
+          "minor": 1,
+          "major": 1,
+          "critical": 27
+        },
+        "waived": {
+          "total": 0
+        }
+      },
+      "environment": "",
+      "version": "",
+      "platform": null,
+      "statistics": null,
+      "profiles": [
+
+      ],
+      "job_id": "",
+      "ipaddress": "40.88.123.179",
+      "fqdn": "",
+      "chef_server": "",
+      "chef_organization": "",
+      "roles": [
+
+      ],
+      "chef_tags": [
+
+      ],
+      "projects": [
+
+      ],
+      "status_message": ""
+    },
+    {
+      "id": "15547db8-5eaf-46ec-8a44-52b4ca648741",
+      "node_id": "f4025ae0-a8c5-4609-bfde-4ea581adc0e9",
+      "node_name": "major-only",
+      "end_time": "2021-03-24T15:28:55Z",
+      "status": "failed",
+      "controls": {
+        "total": 57,
+        "passed": {
+          "total": 29
+        },
+        "skipped": {
+          "total": 1
+        },
+        "failed": {
+          "total": 1,
+          "minor": 0,
+          "major": 1,
+          "critical": 0
+        },
+        "waived": {
+          "total": 0
+        }
+      },
+      "environment": "",
+      "version": "",
+      "platform": null,
+      "statistics": null,
+      "profiles": [
+
+      ],
+      "job_id": "",
+      "ipaddress": "40.88.123.179",
+      "fqdn": "",
+      "chef_server": "",
+      "chef_organization": "",
+      "roles": [
+
+      ],
+      "chef_tags": [
+
+      ],
+      "projects": [
+
+      ],
+      "status_message": ""
+    }
+  ]
+}
