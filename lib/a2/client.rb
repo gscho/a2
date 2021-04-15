@@ -47,7 +47,7 @@ module A2
       JSON.parse(response.body)
     end
 
-    def download_report(path, json, output_file)
+    def download_file(path, json, output_file)
       File.open(output_file, "w") do |file|
         HTTParty.post(File.join(@automate_url, path).to_s, {
           verify: !@ssl_no_verify,

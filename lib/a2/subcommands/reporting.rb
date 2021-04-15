@@ -25,6 +25,37 @@ module A2
           end
         end
       end
+      class ListReports < Paginated
+        def initialize
+          super('list-reports', takes_commands: false, filter_key: 'type')
+          options.on('-i', '--skip-impact IMPACT', 'Only show reports with an impact score greater than the provided value.') do |impact|
+            @opt[:impact] = impact
+          end
+        end
+
+        def execute
+          impact = @opt.delete(:impact)
+          with_paginated_filter_json do |json|
+            reports_json = A2::Client.new(command_parser.data).list_reports(json)
+            reports_json = filter_by_min_impact(reports_json, impact) unless impact.nil?
+
+            puts JSON.pretty_generate(reports_json)
+          end
+        end
+
+        def filter_by_min_impact(report_json, impact)
+          report_json['reports'].delete_if do |report|
+            if impact == 'minor'
+              if report['controls']['failed']['major'].eql?(0) && report['controls']['failed']['critical'].eql?(0)
+                true
+              end
+            elsif impact == 'major'
+              true if report['controls']['failed']['critical'].eql?(0)
+            end
+          end
+          report_json
+        end
+      end
     end
   end
 end
