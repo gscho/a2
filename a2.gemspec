@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ['greg.c.schofield@gmail.com']
   spec.summary       = %q{A gem for interacting with the Chef Automate 2+ API}
   spec.description   = %q{A gem for interacting with the Chef Automate 2+ API}
-  spec.homepage      = 'https://github.com/gscho/a2-cli'
+  spec.homepage      = 'https://github.com/gscho/a2'
   spec.license       = 'MIT'
   spec.files         = Dir.chdir(File.expand_path('..', __FILE__)) do
     `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
