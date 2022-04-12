@@ -3,10 +3,13 @@
 ![build status](https://github.com/gscho/a2-cli/actions/workflows/run-rake.yml/badge.svg?branch=main)
 [![Gem Version](https://badge.fury.io/rb/a2.svg)](https://badge.fury.io/rb/a2)
 
-This gem is a CLI for interacting with Chef Automate 2+ APIs.
+A CLI and ruby client for interacting with Chef Automate 2+ APIs.
 
 
 ## Usage
+
+* [CLI Usage](#using-from-the-command-line)
+* [Client Usage](#using-as-an-api-client)
 
 ### Using from the command line
 
@@ -75,9 +78,9 @@ List the available commands:
         -h, --help                       Show help
 
 
-### Using as a library
+### Using as an API Client
 
-You can also use it as a library by adding this line to your application's Gemfile:
+You can also use the ruby API client directly by adding this line to your application's Gemfile:
 
 ```ruby
 gem 'a2'
