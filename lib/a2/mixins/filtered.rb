@@ -3,7 +3,7 @@ module A2
     attr_reader :query_filter, :filter_key
     def initialize(name, opts = {})
       set_custom_opts!(opts)
-      super(name, opts)
+      super(name, takes_commands: opts[:takes_commands])
       set_filter_optparse_options!(options, @query_filter)
     end
 
