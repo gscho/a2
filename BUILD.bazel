@@ -1,0 +1,43 @@
+#———————————————————————————————————————————————————————————————————————
+# Define Ruby executable, test, spec and package a gem
+#———————————————————————————————————————————————————————————————————————
+
+load(
+    "@bazelruby_rules_ruby//ruby:defs.bzl",
+    "ruby_binary",
+    "ruby_library",
+    "ruby_test",
+    "ruby_rubocop",
+)
+
+package(default_visibility = ["//:__subpackages__"])
+
+ruby_binary(
+    name = "a2-bin",
+    srcs = ["bin/a2"],
+    deps = [
+        "//:a2-lib",
+        "@bundle//:gems",
+    ],
+    # args = ["-v"],
+    main = "bin/a2"
+)
+
+ruby_library(
+    name = "a2-lib",
+    srcs = glob(["lib/**/*.rb"]),
+    includes = ["lib"],
+)
+
+ruby_test(
+    name = "a2-test",
+    srcs = [
+        "//:a2-lib",
+    ] + glob([
+        "test/**/*_test.rb",
+    ]),
+    deps = [
+        "@bundle//:gems",
+    ],
+    main = "@bundle//:bin/rake",
+)
