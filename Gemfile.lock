@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    a2 (0.3.0)
+    a2 (0.3.1)
       cmdparse
       httparty
 
@@ -53,14 +53,12 @@ GEM
       rainbow (>= 2.2.1)
       rake (>= 10.0)
       retriable (~> 3.0)
-    httparty (0.18.1)
-      mime-types (~> 3.0)
+    httparty (0.21.0)
+      mini_mime (>= 1.0.0)
       multi_xml (>= 0.5.2)
     i18n (1.8.5)
       concurrent-ruby (~> 1.0)
-    mime-types (3.3.1)
-      mime-types-data (~> 3.2015)
-    mime-types-data (3.2021.0225)
+    mini_mime (1.1.2)
     minitest (5.14.4)
     multi_json (1.15.0)
     multi_xml (0.6.0)
@@ -96,7 +94,7 @@ PLATFORMS
 
 DEPENDENCIES
   a2!
-  bundler (~> 2.2.15)
+  bundler (~> 2.3)
   github_changelog_generator
   minitest (~> 5.0)
   rake (>= 12.3.3)
