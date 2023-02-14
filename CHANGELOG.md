@@ -1,6 +1,15 @@
 # Changelog
 
-## [Unreleased](https://github.com/gscho/a2-cli/tree/HEAD)
+## [v0.3.1](https://github.com/gscho/a2-cli/tree/HEAD)
+
+[Full Changelog](https://github.com/gscho/a2-cli/compare/v0.3.0...HEAD)
+
+**Merged pull requests:**
+
+- Ruby 3.1 support [\#6](https://github.com/gscho/a2-cli/pull/6) ([gscho](https://github.com/gscho))
+- Bump addressable from 2.7.0 to 2.8.0 [\#5](https://github.com/gscho/a2-cli/pull/5) ([gscho](https://github.com/gscho))
+
+## [v0.3.0](https://github.com/gscho/a2-cli/tree/HEAD)
 
 [Full Changelog](https://github.com/gscho/a2-cli/compare/v0.2.0...HEAD)
 
